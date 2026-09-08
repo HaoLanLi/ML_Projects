@@ -1,0 +1,23 @@
+Machine learning is a field of computing in which algorithms learn patterns from data and use those patterns to make predictions or decisions. A typical machine learning workflow includes collecting data, cleaning data, selecting features, splitting datasets, training a model, evaluating performance, and deploying or analyzing the trained model.
+
+Supervised learning uses labeled examples. In a classification problem, the target is a category such as spam or not spam. In a regression problem, the target is a numerical value such as a house price. The model learns a relationship between input features and target values from training data.
+
+A dataset is commonly divided into training and testing sets. The training set is used to learn model parameters, while the test set is reserved for evaluating how well the trained model generalizes to unseen examples. A validation set can also be used during model development for choosing hyperparameters or comparing model configurations.
+
+Feature preprocessing can have a major effect on model performance. Numerical features may need scaling, while categorical variables may require encoding. Missing values can be handled through removal or imputation depending on the dataset. Data preprocessing steps should be applied consistently to training and future inference data.
+
+Linear regression is a basic regression algorithm that models a numerical target as a weighted combination of input features. Logistic regression is commonly used for classification despite its name. It estimates probabilities for classes and can be combined with a decision threshold to produce predictions.
+
+Overfitting occurs when a model learns details of the training data that do not generalize well to new data. An overfit model can have excellent training performance but poor test performance. Underfitting occurs when a model is too simple to capture important patterns. Techniques such as regularization, cross-validation, feature selection, and appropriate model complexity can help address these problems.
+
+Evaluation metrics should match the problem. For regression, mean absolute error and mean squared error are commonly used. For classification, accuracy can be useful when classes are balanced, while precision, recall, and F1 score can provide more information when the costs of different errors are unequal.
+
+Neural networks are machine learning models composed of layers of interconnected computational units. A neural network can learn nonlinear relationships by applying weighted transformations and activation functions. During training, a loss function measures prediction error, and an optimization algorithm adjusts model parameters to reduce that error.
+
+Convolutional neural networks are particularly useful for image-related tasks. Convolutional layers can learn local visual patterns such as edges, textures, and more complex structures. Pooling layers can reduce spatial dimensions and help create more compact representations. CNNs have been widely applied to image classification and related computer vision problems.
+
+Training a machine learning model requires computational resources. Small models and datasets can often be trained on a personal computer, while larger workloads may benefit from GPUs or cloud infrastructure. Resource constraints should influence model selection and experimentation strategy.
+
+Machine learning projects should also consider data leakage. Data leakage occurs when information that would not be available at prediction time accidentally enters the training process. This can produce unrealistically strong evaluation results. A reliable workflow keeps preprocessing and feature selection separated appropriately between training and evaluation data.
+
+A machine learning model is not automatically useful just because it has a high evaluation score. Developers should understand the data, assumptions, error patterns, and real-world requirements. Monitoring may be necessary after deployment because data distributions can change over time. Responsible machine learning also considers privacy, security, fairness, and the consequences of incorrect predictions.

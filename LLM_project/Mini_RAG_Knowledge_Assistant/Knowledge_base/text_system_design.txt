@@ -1,0 +1,23 @@
+System design is the process of deciding how software components work together to satisfy functional and non-functional requirements. A system design may describe clients, APIs, databases, caches, message queues, storage systems, authentication services, and external services. Good design balances reliability, performance, scalability, maintainability, and development complexity.
+
+A common web application architecture separates responsibilities into layers. The client sends requests to an API or application server. The application server performs business logic and communicates with databases or other services. A database stores persistent information. Additional components such as caches or queues can be introduced when specific requirements justify them.
+
+Scalability describes the ability of a system to handle increasing workload. Vertical scaling means increasing the resources of an individual machine. Horizontal scaling means adding more machines or application instances. Stateless application servers are often easier to scale horizontally because any server can process a request without depending on local session state.
+
+A load balancer can distribute incoming requests across multiple application instances. This can improve availability and prevent a single application server from becoming a bottleneck. Health checks can help the load balancer avoid sending traffic to unhealthy instances. A system still needs a strategy for deployments, failures, and capacity management.
+
+Caching can reduce latency and decrease load on backend systems. A cache stores frequently used data closer to the component that needs it. Redis is one example of an in-memory data store that can serve as a cache. Cache design requires decisions about expiration, invalidation, cache keys, and what should happen when the cache is unavailable.
+
+Message queues can help separate producers from consumers. For example, an API may receive a request that requires a long-running task. Instead of making the user wait for the entire operation, the API can place a job on a queue. A worker can consume the job and process it asynchronously. This pattern can improve responsiveness and allow workers to scale independently.
+
+Reliability means that a system continues to provide useful service when components fail. Redundancy is one approach to reliability. If an application has multiple instances, the failure of one instance does not necessarily stop the entire service. Databases can also use replication and backups to reduce the impact of hardware or software failures.
+
+Observability helps engineers understand what is happening inside a production system. Logs record events, metrics provide numerical measurements, and traces can show how a request moves across multiple services. Useful metrics may include request latency, error rate, throughput, CPU usage, memory usage, and queue length.
+
+API design is another important system design concern. APIs should define clear request and response formats. HTTP status codes can communicate whether an operation succeeded or failed. Authentication determines who a user is, while authorization determines what that user is allowed to do. Sensitive operations should be protected using appropriate security mechanisms.
+
+Microservices divide an application into multiple independently deployable services. Each service can own a particular business capability. Microservices may improve organizational flexibility and independent scaling, but they also add operational complexity. Network communication introduces latency and new failure modes. For smaller applications, a modular monolith can sometimes be simpler.
+
+Distributed systems require careful consideration of network failures and partial failures. A request can fail even when another component is still running. Timeouts, retries, and circuit breakers can help manage certain failures, but retries must be designed carefully because repeated requests can overload an already struggling service.
+
+Good system design begins with requirements. Before selecting technologies, engineers should identify expected traffic, data size, latency targets, availability requirements, security constraints, and operational limitations. A simple design that satisfies the requirements is often preferable to a complicated architecture that introduces unnecessary components.

@@ -1,0 +1,21 @@
+A database is a system used to store, organize, retrieve, and modify data. Applications depend on databases when information must persist beyond the lifetime of a program. Common database categories include relational databases and NoSQL databases. The choice depends on the structure of the data, consistency requirements, query patterns, and scalability needs.
+
+Relational databases organize information into tables containing rows and columns. Each table usually represents a type of entity, such as users, products, or orders. A primary key uniquely identifies a row. Foreign keys can connect records between tables. SQL is commonly used to create tables, insert records, update data, and retrieve information.
+
+Database normalization is a technique for organizing relational data to reduce unnecessary duplication. A normalized design may separate customers, orders, and products into different tables and connect them through keys. Although normalization can improve consistency, some systems intentionally use denormalization when faster reads are more important than minimizing duplicated data.
+
+Indexes are important for database performance. An index is an additional data structure that helps the database locate rows without scanning an entire table. For example, if an application frequently searches users by email address, an index on the email column can make that query faster. Indexes also require storage and can increase the cost of insert and update operations, so they should be created based on actual query patterns.
+
+Transactions allow multiple database operations to be treated as a logical unit. A transaction should generally preserve important consistency guarantees. The commonly discussed ACID properties are atomicity, consistency, isolation, and durability. Atomicity means a transaction is treated as a whole, so a failure can prevent partial completion. Durability means committed data should survive appropriate system failures.
+
+Caching is another technique used to improve application performance. Redis is an in-memory data store that can be used for caching frequently requested information. Instead of querying a database for the same expensive result repeatedly, an application can temporarily store the result in Redis. When the cached value is available, the application can return it without performing the original database operation.
+
+Caching introduces a trade-off because cached information can become stale. Applications therefore need a strategy for expiration and invalidation. A time-to-live value can automatically remove data after a specified period. Another strategy is to explicitly invalidate a cached value when the underlying database record changes.
+
+Connection pooling can improve database performance for applications that frequently open connections. Rather than creating a completely new database connection for every request, an application can reuse connections from a pool. This can reduce connection overhead and help control the number of simultaneous connections.
+
+Database security is important. Applications should avoid constructing SQL queries by directly concatenating untrusted user input. Parameterized queries or well-designed database libraries can reduce the risk of SQL injection. Database credentials should not be hard-coded into source code that is shared publicly. Environment variables or secure configuration systems are commonly used for secrets.
+
+Large applications may use database replication. A primary database can handle writes while one or more replicas serve read requests. Replication can improve read scalability, although it introduces additional considerations such as replication delay and failure handling.
+
+Database design should begin with the application's data and access requirements. Developers should identify important entities, relationships, common queries, expected data volume, and consistency requirements. Performance optimization should be measured rather than based only on assumptions. Query plans, indexes, caching, and schema design can then be evaluated using realistic workloads.
