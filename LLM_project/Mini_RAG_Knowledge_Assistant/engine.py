@@ -1,6 +1,31 @@
 import math
 from collections import Counter, defaultdict
 
+def tokenize(text):
+
+    if not text:
+        return []
+
+    text = text.lower()
+    tokens = []
+    current_english_word = []
+
+    # Go through the text character by character
+    for char in text:
+        if char.isalnum() and char.isascii():
+            current_english_word.append(char)
+        else:
+            if current_english_word:
+                tokens.append("".join(current_english_word))
+                current_english_word = []
+            if '\u4e00' <= char <= '\u9fa5':
+                tokens.append(char)
+    if current_english_word:
+        tokens.append("".join(current_english_word))
+
+    return tokens
+
+
 class BM25Engine:
 
     def __init__(self, chunks, k1=1.5, b=0.75):
@@ -14,8 +39,7 @@ class BM25Engine:
 
         # Tokenized content of each chunk
         self.docs = [
-            chunk["content"].lower().split()
-            for chunk in chunks
+            tokenize(chunk["content"]) for chunk in chunks
         ]
 
         # Length of each chunk
@@ -57,7 +81,7 @@ class BM25Engine:
 
     def score_document(self, query, doc_index):
 
-        query_terms = query.lower().split()
+        query_terms = tokenize(query)
 
         doc_len = self.doc_lengths[doc_index]
         tf_dict = self.doc_term_frequencies[doc_index]
@@ -76,13 +100,7 @@ class BM25Engine:
             numerator = tf * (self.k1 + 1)
 
             denominator = (
-                tf
-                + self.k1
-                * (
-                    1 - self.b
-                    + self.b
-                    * (doc_len / self.avg_doc_length)
-                )
+                tf+ self.k1* (1 - self.b + self.b * (doc_len / self.avg_doc_length))
             )
 
             score += idf * (numerator / denominator)
@@ -95,9 +113,7 @@ class BM25Engine:
         scores = []
 
         for i in range(self.corpus_size):
-
             score = self.score_document(query, i)
-
             scores.append((i, score))
 
         scores.sort(key=lambda x: x[1], reverse=True)

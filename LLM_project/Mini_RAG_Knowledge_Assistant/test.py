@@ -19,7 +19,7 @@ engine = BM25Engine(all_chunks)
 
 
 # Test query
-query = "supervised learning"
+query = "三角洲"
 
 results = engine.rank_documents(query, top_n=3)
 

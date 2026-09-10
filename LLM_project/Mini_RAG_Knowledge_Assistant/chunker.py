@@ -4,29 +4,21 @@ def chunk_document(document, chunk_size=300, overlap=50):
     content = document["content"]
     filename = document["filename"]
 
-    words = content.split()
+    lines = content.split("\n")
 
     chunks = []
-
-    start = 0
     chunk_id = 0
 
-    # Create a chunk containing up to chunk_size words.
-    # The final chunk may contain fewer words if there are not enough words remaining.
-    while start < len(words):
-
-        end = start + chunk_size
-
-        chunk_words = words[start:end]
+    for line in lines:
+        cleaned_line = line.strip()
+        if not cleaned_line:
+            continue
 
         chunks.append({
             "filename": filename,
             "chunk_id": chunk_id,
-            "content": " ".join(chunk_words)
+            "content": cleaned_line
         })
-
         chunk_id += 1
-
-        start += chunk_size - overlap
 
     return chunks
