@@ -1,7 +1,7 @@
 # This is a data loader for the RAG system.
 from pathlib import Path
 
-def load_documents(folder_path):
+def load_documents(folder_path = "Knowledge_base"):
     documents = []
     folder = Path(folder_path)
 
@@ -12,6 +12,6 @@ def load_documents(folder_path):
             "content": content
         })
     if not documents:
-        print("No .txt files found.")
+        print("No .txt file found.")
 
     return documents
